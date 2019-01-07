@@ -11,6 +11,24 @@
 #![feature(asm)]
 #![feature(core_intrinsics)]
 
+#[macro_use]
 pub mod asm;
+
 pub mod barrier;
 pub mod regs;
+
+// TODO: this should be in asm but can't seem to resolve it when nested
+#[macro_export]
+macro_rules! svc {
+    ( $syndrome:expr ) => {
+        match () {
+            #[cfg(target_arch = "aarch64")]
+            () => unsafe {
+                asm!(concat!("svc ", stringify!($syndrome)) :::: "volatile");
+            },
+
+            #[cfg(not(target_arch = "aarch64"))]
+            () => unimplemented!(),
+        }
+    };
+}
