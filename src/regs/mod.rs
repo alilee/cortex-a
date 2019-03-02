@@ -23,6 +23,8 @@ mod sp_el1;
 mod spsel;
 mod spsr_el2;
 mod tcr_el1;
+mod tpidr_el0;
+mod tpidrro_el0;
 mod ttbr0_el1;
 mod vbar_el1;
 
@@ -49,5 +51,7 @@ pub use self::sp_el1::SP_EL1;
 pub use self::spsel::SPSel;
 pub use self::spsr_el2::SPSR_EL2;
 pub use self::tcr_el1::TCR_EL1;
+pub use self::tpidr_el0::TPIDR_EL0;
+pub use self::tpidrro_el0::TPIDRRO_EL0;
 pub use self::ttbr0_el1::TTBR0_EL1;
 pub use self::vbar_el1::VBAR_EL1;
