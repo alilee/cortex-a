@@ -5,16 +5,16 @@
 // Author(s):
 //   - Andre Richter <andre.o.richter@gmail.com>
 
-//! Translation Table Base Register 0 - EL1
+//! Translation Table Base Register 1 - EL1
 //!
 //! Holds the base address of the translation table for the initial lookup for stage 1 of the
-//! translation of an address from the lower VA range in the EL1&0 translation regime, and other
+//! translation of an address from the higher VA range in the EL1&0 translation regime, and other
 //! information for this translation regime.
 
 use register::{cpu::RegisterReadWrite, register_bitfields};
 
 register_bitfields! {u64,
-    TTBR0_EL1 [
+    TTBR1_EL1 [
         /// An ASID for the translation table base address. The TCR_EL1.A1 field selects either
         /// TTBR0_EL1.ASID or TTBR1_EL1.ASID.
         ///
@@ -32,16 +32,16 @@ register_bitfields! {u64,
 
 pub struct Reg;
 
-impl RegisterReadWrite<u64, TTBR0_EL1::Register> for Reg {
-    sys_coproc_read_raw!(u64, "TTBR0_EL1");
-    sys_coproc_write_raw!(u64, "TTBR0_EL1");
+impl RegisterReadWrite<u64, TTBR1_EL1::Register> for Reg {
+    sys_coproc_read_raw!(u64, "TTBR1_EL1");
+    sys_coproc_write_raw!(u64, "TTBR1_EL1");
 }
 
 impl Reg {
     #[inline]
     pub fn set_baddr(&self, addr: u64) {
-        self.write(TTBR0_EL1::BADDR.val(addr >> 1));
+        self.write(TTBR1_EL1::BADDR.val(addr >> 1));
     }
 }
 
-pub static TTBR0_EL1: Reg = Reg {};
+pub static TTBR1_EL1: Reg = Reg {};
