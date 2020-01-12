@@ -13,6 +13,7 @@ use register::cpu::RegisterReadWrite;
 
 pub struct Reg;
 
+// FIXME: CNTP_TVAL_EL0 is i32
 impl RegisterReadWrite<u32, ()> for Reg {
     sys_coproc_read_raw!(u32, "CNTP_TVAL_EL0");
     sys_coproc_write_raw!(u32, "CNTP_TVAL_EL0");
