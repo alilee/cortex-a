@@ -8,7 +8,7 @@
 
 //! Miscellaneous assembly instructions
 
-use core;
+//use core;
 
 /// The classic no-op
 #[inline(always)]
