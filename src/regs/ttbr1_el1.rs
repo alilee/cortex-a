@@ -14,7 +14,7 @@
 use register::{cpu::RegisterReadWrite, register_bitfields};
 
 register_bitfields! {u64,
-    TTBR1_EL1 [
+    pub TTBR1_EL1 [
         /// An ASID for the translation table base address. The TCR_EL1.A1 field selects either
         /// TTBR0_EL1.ASID or TTBR1_EL1.ASID.
         ///
@@ -38,6 +38,11 @@ impl RegisterReadWrite<u64, TTBR1_EL1::Register> for Reg {
 }
 
 impl Reg {
+    #[inline]
+    pub fn get_baddr(&self) -> u64 {
+        self.read(TTBR1_EL1::BADDR) << 1
+    }
+
     #[inline]
     pub fn set_baddr(&self, addr: u64) {
         self.write(TTBR1_EL1::BADDR.val(addr >> 1));
